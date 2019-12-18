@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Scenario extends Model
 {
@@ -23,6 +24,14 @@ class Scenario extends Model
     {
         return $this->belongsTo(Option::class)
             ->withDefault();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(Group::class);
     }
 
 }

@@ -52,6 +52,7 @@ class Group extends Resource
                 ->rules('required', 'max:255'),
 
             BelongsToMany::make('Segments'),
+            BelongsToMany::make('Scenarios'),
         ];
     }
 
