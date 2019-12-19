@@ -21,8 +21,6 @@ class CreateSegmentsTable extends Migration
             $table->json('regulator');
             $table->timestamps();
 
-            $table->unique(['project_id', 'regulator']);
-
             $table->foreign('project_id')
                 ->references('id')
                 ->on('projects');

@@ -34,6 +34,7 @@
         "spatie/laravel-sluggable": "^2.3"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.13",
         "fzaninotto/faker": "^1.9",
         "mockery/mockery": "^1.3",
