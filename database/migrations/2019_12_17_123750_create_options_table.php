@@ -17,6 +17,7 @@ class CreateOptionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('scenario_id');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->timestamps();
 
             $table->unique(['scenario_id', 'name']);

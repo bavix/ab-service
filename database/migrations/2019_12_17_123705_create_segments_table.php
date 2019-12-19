@@ -17,12 +17,11 @@ class CreateSegmentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('project_id');
             $table->string('name');
-            $table->string('type');
-            $table->string('compare');
-            $table->string('value');
+            $table->string('slug')->unique();
+            $table->json('regulator');
             $table->timestamps();
 
-            $table->unique(['project_id', 'type', 'compare', 'value']);
+            $table->unique(['project_id', 'regulator']);
 
             $table->foreign('project_id')
                 ->references('id')

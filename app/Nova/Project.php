@@ -48,7 +48,8 @@ class Project extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            BelongsTo::make('User'),
+            BelongsTo::make('User')
+                ->readonly(),
         ];
     }
 

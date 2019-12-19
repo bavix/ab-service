@@ -14,8 +14,9 @@ class CreateScenariosTable extends Migration
     public function up()
     {
         Schema::create('scenarios', static function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
+            $table->bigIncrements('id');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('option_id')->nullable();
             $table->boolean('enabled')->default(true);
