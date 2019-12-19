@@ -29,7 +29,7 @@ class SegmentDataProvider
                 return request()->input();
         }
 
-        return [];
+        return request()->all();
     }
 
     /**
