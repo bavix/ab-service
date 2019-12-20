@@ -48,7 +48,8 @@ class Scenario extends Model
     protected $fillable = [
         'name',
         'project_id',
-        'option_id',
+        'ratified_id',
+        'approved_id',
         'enabled',
     ];
 
@@ -57,7 +58,8 @@ class Scenario extends Model
      */
     protected $casts = [
         'project_id' => 'int',
-        'option_id' => 'int',
+        'ratified_id' => 'int',
+        'approved_id' => 'int',
         'enabled' => 'bool',
     ];
 
@@ -72,9 +74,18 @@ class Scenario extends Model
     /**
      * @return BelongsTo
      */
-    public function option(): BelongsTo
+    public function ratifiedOption(): BelongsTo
     {
-        return $this->belongsTo(Option::class)
+        return $this->belongsTo(Option::class, 'ratified_id')
+            ->withDefault();
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function approvedOption(): BelongsTo
+    {
+        return $this->belongsTo(Option::class, 'approved_id')
             ->withDefault();
     }
 
@@ -94,7 +105,7 @@ class Scenario extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug')
-            ->doNotGenerateSlugsOnCreate();
+            ->doNotGenerateSlugsOnUpdate();
     }
 
 }

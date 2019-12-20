@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->singleton(SegmentDataProvider::class);
         $this->app->singleton(CompareService::class);
@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Project::observe(ProjectObserver::class);
     }

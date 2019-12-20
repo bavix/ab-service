@@ -43,7 +43,7 @@ class RegulatorSet implements \JsonSerializable
      */
     public function jsonSerialize(): array
     {
-        return (array)$this->segment->regulator;
+        return (array)$this->segment->payload;
     }
 
     /**
@@ -52,7 +52,7 @@ class RegulatorSet implements \JsonSerializable
      */
     public function __get(string $key): ?string
     {
-        return $this->segment->regulator[$key] ?? null;
+        return $this->segment->payload[$key] ?? null;
     }
 
     /**
@@ -61,7 +61,7 @@ class RegulatorSet implements \JsonSerializable
      */
     public function __set(string $key, $value): void
     {
-        $this->segment->regulator[$key] = $value;
+        $this->segment->payload[$key] = $value;
     }
 
     /**
@@ -69,7 +69,7 @@ class RegulatorSet implements \JsonSerializable
      */
     public function __unset(string $key): void
     {
-        unset($this->segment->regulator[$key]);
+        unset($this->segment->payload[$key]);
     }
 
     /**
@@ -78,7 +78,7 @@ class RegulatorSet implements \JsonSerializable
      */
     public function __isset(string $key): bool
     {
-        return array_key_exists($key, $this->segment->regulator);
+        return array_key_exists($key, $this->segment->payload);
     }
 
 }

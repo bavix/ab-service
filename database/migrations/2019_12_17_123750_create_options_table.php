@@ -24,7 +24,11 @@ class CreateOptionsTable extends Migration
         });
 
         Schema::table('scenarios', static function (Blueprint $table) {
-            $table->foreign(['option_id'])
+            $table->foreign(['ratified_id'])
+                ->references('id')
+                ->on('options');
+
+            $table->foreign(['approved_id'])
                 ->references('id')
                 ->on('options');
         });
@@ -38,7 +42,8 @@ class CreateOptionsTable extends Migration
     public function down()
     {
         Schema::table('scenarios', static function (Blueprint $table) {
-            $table->dropForeign(['option_id']);
+            $table->dropForeign(['ratified_id']);
+            $table->dropForeign(['approved_id']);
         });
 
         Schema::dropIfExists('options');

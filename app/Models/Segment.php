@@ -17,7 +17,7 @@ use Spatie\Sluggable\SlugOptions;
  * @property int $project_id
  * @property string $name
  * @property string $slug
- * @property array $regulator
+ * @property array $payload
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read array|string $compare
@@ -36,7 +36,7 @@ use Spatie\Sluggable\SlugOptions;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Segment whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Segment whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Segment whereProjectId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Segment whereRegulator($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Segment wherePayload($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Segment whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Segment whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -52,7 +52,7 @@ class Segment extends Model
     protected $fillable = [
         'project_id',
         'name',
-        'regulator', // from, what, compare, value
+        'payload', // from, what, compare, value
     ];
 
     /**
@@ -60,7 +60,7 @@ class Segment extends Model
      */
     protected $casts = [
         'project_id' => 'int',
-        'regulator' => 'json',
+        'payload' => 'json',
     ];
 
     /**
@@ -87,7 +87,7 @@ class Segment extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug')
-            ->doNotGenerateSlugsOnCreate();
+            ->doNotGenerateSlugsOnUpdate();
     }
 
     /**
@@ -108,7 +108,7 @@ class Segment extends Model
      */
     public function getInputAttribute(): string
     {
-        return $this->regulator_set->input;
+        return $this->getRegulatorSetAttribute()->input;
     }
 
     /**
@@ -116,7 +116,7 @@ class Segment extends Model
      */
     public function getWhatAttribute(): string
     {
-        return $this->regulator_set->what;
+        return $this->getRegulatorSetAttribute()->what;
     }
 
     /**
@@ -124,7 +124,7 @@ class Segment extends Model
      */
     public function getCompareAttribute(): string
     {
-        return $this->regulator_set->compare;
+        return $this->getRegulatorSetAttribute()->compare;
     }
 
     /**
@@ -132,7 +132,7 @@ class Segment extends Model
      */
     public function getValueAttribute()
     {
-        return $this->regulator_set->value;
+        return $this->getRegulatorSetAttribute()->value;
     }
 
 }

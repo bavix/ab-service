@@ -18,12 +18,13 @@ class CreateScenariosTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('option_id')->nullable();
+            $table->unsignedBigInteger('ratified_id')->nullable();
+            $table->unsignedBigInteger('approved_id')->nullable();
             $table->boolean('enabled')->default(true);
             $table->timestamps();
 
             $table->unique(['name', 'project_id']);
-            $table->foreign('project_id')
+            $table->foreign(['project_id'])
                 ->references('id')
                 ->on('projects');
         });
@@ -34,11 +35,11 @@ class CreateScenariosTable extends Migration
             $table->unsignedBigInteger('scenario_id');
             $table->timestamps();
 
-            $table->foreign('group_id')
+            $table->foreign(['group_id'])
                 ->references('id')
                 ->on('groups');
 
-            $table->foreign('scenario_id')
+            $table->foreign(['scenario_id'])
                 ->references('id')
                 ->on('scenarios');
         });
@@ -51,6 +52,7 @@ class CreateScenariosTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('group_scenario');
         Schema::dropIfExists('scenarios');
     }
 }

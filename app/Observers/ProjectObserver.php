@@ -14,7 +14,9 @@ class ProjectObserver
      */
     public function creating(Project $project): void
     {
-        $project->user()->associate(Auth::user());
+        if (!$project->user_id && Auth::user()) {
+            $project->user()->associate(Auth::user());
+        }
     }
 
 }

@@ -20,7 +20,7 @@ class CreateGroupsTable extends Migration
             $table->unsignedBigInteger('project_id');
             $table->timestamps();
 
-            $table->foreign('project_id')
+            $table->foreign(['project_id'])
                 ->references('id')
                 ->on('projects');
         });
@@ -31,11 +31,11 @@ class CreateGroupsTable extends Migration
             $table->unsignedBigInteger('segment_id');
             $table->timestamps();
 
-            $table->foreign('group_id')
+            $table->foreign(['group_id'])
                 ->references('id')
                 ->on('groups');
 
-            $table->foreign('segment_id')
+            $table->foreign(['segment_id'])
                 ->references('id')
                 ->on('segments');
         });

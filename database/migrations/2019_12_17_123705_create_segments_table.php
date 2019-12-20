@@ -18,10 +18,10 @@ class CreateSegmentsTable extends Migration
             $table->unsignedBigInteger('project_id');
             $table->string('name');
             $table->string('slug')->unique();
-            $table->json('regulator');
+            $table->json('payload');
             $table->timestamps();
 
-            $table->foreign('project_id')
+            $table->foreign(['project_id'])
                 ->references('id')
                 ->on('projects');
         });

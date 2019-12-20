@@ -47,7 +47,11 @@ class Scenario extends Resource
             ID::make()->sortable(),
 
             BelongsTo::make('Project'),
-            BelongsTo::make('Option')
+
+            BelongsTo::make('Ratified Option', 'ratifiedOption', Option::class)
+                ->nullable(),
+
+            BelongsTo::make('Approved Option', 'approvedOption', Option::class)
                 ->nullable(),
 
             Text::make('Name')
